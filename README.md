@@ -9,3 +9,4 @@ source venv/bin/activate #linux
 Luego se ejecuta el comando en el directorio donde se encuentra app.py:
 flask run
 En la terminal se presentara el enlace donde probar la API: http://127.0.0.1:5000/
+# Horas trabajadas: 2
