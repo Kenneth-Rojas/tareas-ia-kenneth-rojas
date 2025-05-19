@@ -2,8 +2,8 @@ import nlp as nlp
 import pdf as pdf
 import plot as plot
 # Reemplazar rutas
-ruta1 = '/home/kenny/Downloads/Prerreporte3Digitales.pdf'
-ruta2 = '/home/kenny/Downloads/Prerreporte3Digitales.pdf'
+ruta1 = 'archivo1.pdf'
+ruta2 = 'archivo2.pdf'
 # ngramas
 n = 2
 # Funciones de procesamiento de texto
