@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html lang="{{ 'en' if language|lower == 'english' else 'es' }}">
+<html lang="{{ 'en' if language == 'english' else 'es' }}">
 <head>
-    <meta charset="UTF-8" />
-    <title>{{ 'Book Flashcards' if language|lower == 'english' else 'Flashcards del libro' }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <meta charset="UTF-8" />
+  <title>{{ 'Book Flashcards' if language == 'english' else 'Flashcards del libro' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-    <div class="container">
-        <h2>{{ 'Book Flashcards' if language|lower == 'english' else 'Flashcards del libro' }}</h2>
-        <ol>
-          {% for title, summary in flashcards %}
-            <li>
-              <strong>{{ title }}</strong>: {{ summary }}
-            </li>
-          {% endfor %}
-        </ol>
+  <div class="container">
+    <h2>{{ 'Book Flashcards' if language == 'english' else 'Flashcards del libro' }}</h2>
 
-        <a href="/" style="display:inline-block; margin-top:20px;">
-            {{ 'Return to start' if language|lower == 'english' else 'Volver al inicio' }}
-        </a>
+    <div class="flashcards-container">
+      {% for title, summary in flashcards %}
+      <div class="flashcard">
+        <div class="flashcard-title">{{ title }}</div>
+        <div class="flashcard-summary">{{ summary }}</div>
+      </div>
+      {% endfor %}
     </div>
+    <a href="/analysis_menu">
+    <button type="button">{{ 'Analysis menu' if language == 'english' else 'Menu de analisis' }}</button>
+    </a>
+
+
+    <a href="/" style="display:inline-block; margin-top:20px;">
+      {{ 'Return to start' if language == 'english' else 'Volver al inicio' }}
+    </a>
+  </div>
 </body>
 </html>

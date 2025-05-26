@@ -59,7 +59,7 @@ def select_book():
         return "Idioma no soportado", 400
 
     return render_template('select_book.html', books=available_books, language=language)
-@app.route('/analysis_menu', methods=['POST'])
+@app.route('/analysis_menu', methods=['POST','GET'])
 def analysis_menu():
     if request.method == 'POST':
        selected_book = request.form['book']

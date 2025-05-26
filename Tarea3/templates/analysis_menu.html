@@ -5,19 +5,22 @@
     <title>{{ 'Analysis Menu' if language == 'english' else 'Menú de Análisis' }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        .analysis-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 30px;
-            align-items: center;
-        }
+    .analysis-buttons {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 30px;
+        justify-content: center;
+    }
 
-        button {
-            width: 80%;
-            max-width: 400px;
-        }
-    </style>
+    button {
+        width: auto;
+        min-width: 150px;
+        max-width: 250px;
+    }
+</style>
+
 </head>
 <body>
     <div class="container">
@@ -54,6 +57,9 @@
                     {{ 'Q&A system' if language == 'english' else 'Preguntas y respuestas' }}
                 </button>
             </form>
+            <a href="/" style="display:inline-block; margin-top:20px;">
+            {{ 'Return to start' if language|lower == 'english' else 'Volver al inicio' }}
+        </a>
         </div>
     </div>
 </body>
