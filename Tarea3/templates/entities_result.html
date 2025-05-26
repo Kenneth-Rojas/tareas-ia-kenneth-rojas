@@ -1,0 +1,15 @@
+<h2>Entidades Principales</h2>
+<ul>
+  {% for entity, count in result.entities %}
+    <li>{{ entity }} ({{ count }})</li>
+  {% endfor %}
+</ul>
+
+<h2>Temas Principales</h2>
+<ul>
+  {% for topic, count in result.topics %}
+    <li>{{ topic }} ({{ count }})</li>
+  {% endfor %}
+</ul>
+
+<a href="/">Volver al inicio</a>

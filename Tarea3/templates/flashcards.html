@@ -1,0 +1,9 @@
+<h2>Flashcards del libro</h2>
+<ol>
+  {% for title, summary in flashcards %}
+    <li>
+      <strong>{{ title }}</strong>: {{ summary }}
+    </li>
+  {% endfor %}
+</ol>
+<a href="/">Volver al inicio</a>

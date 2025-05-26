@@ -1,0 +1,16 @@
+<h2>Análisis de Sentimiento</h2>
+<p><strong>Sentimiento general:</strong> {{ result.sentiment }}</p>
+
+{% if result.scores %}
+  <h3>Detalles (VADER):</h3>
+  <ul>
+    {% for key, value in result.scores.items() %}
+      <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <h3>Confianza del modelo:</h3>
+  <p>{{ result.score }}</p>
+{% endif %}
+
+<a href="/">Volver al inicio</a>

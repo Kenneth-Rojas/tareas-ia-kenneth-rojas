@@ -69,15 +69,52 @@ def analysis_menu():
 
 @app.route('/sentiment_analysis', methods=['POST'])
 def sentiment_analysis():
-    return "Análisis de sentimientos aún no implementado."
+    book = session.get('book')
+    idioma = session.get('language')
+    if not book or not idioma:
+        return redirect('/')
+    if idioma == 'english':
+        text = gutenberg.raw(book)
+    else:
+        path = os.path.join('spanish_books', book)
+        with open(path, 'r', encoding='utf-8') as f:
+            text = f.read()
+    
+    result = nlp.analyze_sentiment(text, idioma)
+
+    return render_template('sentiment_result.html', result=result)
 
 @app.route('/entity_analysis', methods=['POST'])
 def entity_analysis():
-    return "Extracción de temas y personajes aún no implementada."
+    book = session.get('book')
+    language = session.get('language')
+    if not book or not language:
+        return redirect('/')
+
+    if language == 'english':
+        text = gutenberg.raw(book)
+    else:
+        with open(os.path.join('spanish_books', book), encoding='utf-8') as f:
+            text = f.read()
+
+    result = nlp.extract_topics_entities(text, language)
+    return render_template('entities_result.html', result=result)
 
 @app.route('/flashcards', methods=['POST'])
 def flashcards():
-    return "Generación de flashcards aún no implementada."
+    book = session.get('book')
+    language = session.get('language')
+    if not book or not language:
+        return redirect('/')
+
+    if language == 'english':
+        text = gutenberg.raw(book)
+    else:
+        with open(os.path.join('spanish_books', book), encoding='utf-8') as f:
+            text = f.read()
+
+    result = nlp.generate_flashcards(text, language)
+    return render_template('flashcards.html', flashcards=result)
 
 @app.route('/qa', methods=['POST'])
 def qa():
