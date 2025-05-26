@@ -116,9 +116,28 @@ def flashcards():
     result = nlp.generate_flashcards(text, language)
     return render_template('flashcards.html', flashcards=result)
 
-@app.route('/qa', methods=['POST'])
+@app.route('/qa', methods=['GET', 'POST'])
 def qa():
-    return "Sistema de preguntas y respuestas aún no implementado."
+    language = session.get('language')
+    book = session.get('book')
+
+    if not language or not book:
+        return redirect('/')
+
+    if language == 'english':
+        raw_text = gutenberg.raw(book)
+    else:
+        with open(os.path.join("spanish_books", book), 'r', encoding='utf-8') as f:
+            raw_text = f.read()
+
+    answer = None
+    if request.method == 'POST':
+        question = request.form.get('question', '')
+        if question:
+            answer = nlp.answer_question(question, raw_text, language)
+
+    return render_template('qa.html', answer=answer)
+
 
 
 

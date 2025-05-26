@@ -1,0 +1,14 @@
+<h2>Sistema de Preguntas y Respuestas</h2>
+
+<form method="post">
+  <label for="question">Escribí tu pregunta:</label><br>
+  <input type="text" id="question" name="question" required><br><br>
+  <input type="submit" value="Responder">
+</form>
+
+{% if answer %}
+  <h3>Respuesta:</h3>
+  <p>{{ answer }}</p>
+{% endif %}
+
+<a href="/">Volver al inicio</a>

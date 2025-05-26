@@ -13,39 +13,56 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from transformers import pipeline
 import spacy
 from collections import Counter
+from sumy.summarizers.lsa import LsaSummarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.text_rank import TextRankSummarizer
 import re
 
-def analyze_text_basic(text,lenguaje):
-    # Tokenización de oraciones y palabras
-    pattern = r'''(?x)                 # set flag to allow verbose regexps
-              (?:[A-Z]\.)+         # abbreviations, e.g. U.S.A.
-              | \w+(?:-\w+)*       # words with optional internal hyphens
-              | \$?\d+(?:\.\d+)?%? # currency and percentages, e.g. $12.40, 82%
-              | \.\.\.             # ellipsis
-              | [][.,;"'?():-_`]   # these are separate tokens; includes ], ['''
-    if lenguaje == 'english':
-        sentences = nltk.regexp_tokenize(text, pattern)
-        words = nltk.word_tokenize(text.lower())
-    else:  # Asumimos español si no es inglés
-        sentences = nltk.regexp_tokenize(text, pattern)
-        words = nltk.word_tokenize(text, language='spanish')
+def summarize_text_portions(text, lenguaje='english', portion_size=5000, num_sentences=2):
+    # Elegimos tres partes: inicio, medio, final
+    total_length = len(text)
+    portions = [
+        text[:portion_size],
+        text[total_length//2:total_length//2 + portion_size],
+        text[-portion_size:]
+    ]
 
-    
-    # Conteo
+    summarizer = LsaSummarizer()
+    tokenizer = Tokenizer(lenguaje)
+
+    summary = []
+
+    for part in portions:
+        parser = PlaintextParser.from_string(part, tokenizer)
+        sentences = summarizer(parser.document, num_sentences)
+        summary.extend(sentences)
+
+    return ' '.join(str(s) for s in summary)
+
+def analyze_text_basic(text, lenguaje):
+    from nltk import sent_tokenize, word_tokenize
+
+    if lenguaje == 'english':
+        sentences = sent_tokenize(text)
+        words = word_tokenize(text.lower())
+    else:
+        sentences = sent_tokenize(text, language='spanish')
+        words = word_tokenize(text, language='spanish')
+
     num_sentences = len(sentences)
     num_words = len(words)
 
-    # Resumen simple: tomar 3 primeras oraciones como ejemplo
-    summary = ' '.join(sentences[:3])
+    # Resumen optimizado
+    summary = summarize_text_portions(text, lenguaje)
 
     return {
         'num_sentences': num_sentences,
         'num_words': num_words,
         'summary': summary
     }
+
+
 def analyze_sentiment(text, language):
     if language == 'english':
         analyzer = SentimentIntensityAnalyzer()
@@ -105,7 +122,7 @@ def split_paragraphs(text, min_length=300):
 
 def generate_flashcards(text, language):
     # Tokenización básica para dividir en palabras y frases
-    sentence_splitter = re.compile(r'(?<=[.!?])\s+')
+    sentence_splitter = re.compile(r'(?<=[.!?,])\s+')
     sentences = sentence_splitter.split(text)
     text_short = ' '.join(sentences[:50])  # Solo las primeras 50 oraciones
 
@@ -129,3 +146,21 @@ def generate_flashcards(text, language):
         flashcards.append((noun.capitalize(), summary))
 
     return flashcards
+
+def get_qa_pipeline(language):
+    if language == 'english':
+        return pipeline("question-answering", model="distilbert-base-uncased-distilled-squad")
+    else:
+        return pipeline("question-answering")
+def answer_question(question, text, language):
+    qa_pipeline = get_qa_pipeline(language)
+    
+    # Para evitar errores, cortamos el contexto si es muy largo
+    context = text[:1000] if len(text) > 1000 else text
+
+    result = qa_pipeline({
+        'context': context,
+        'question': question
+    })
+
+    return result['answer']

@@ -1,5 +1,37 @@
-<h2>Selecciona un idioma</h2>
-<form method="POST">
-    <button type="submit" name="language" value="english">English</button>
-    <button type="submit" name="language" value="spanish">Español</button>
-</form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Seleccionar idioma</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .language-selection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            text-align: center;
+        }
+
+        .language-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            min-width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container language-selection">
+        <h2>Selecciona un idioma</h2>
+        <form method="POST" class="language-buttons">
+            <button type="submit" name="language" value="english">English</button>
+            <button type="submit" name="language" value="spanish">Español</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,10 +1,37 @@
-<h2>Selecciona un libro en {{ language }}</h2>
-<form method="POST" action="/analysis_menu">
-    <label for="book">Libro:</label>
-    <select name="book" id="book">
-        {% for book in books %}
-        <option value="{{ book }}">{{ book }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit">Analizar</button>
-</form>
+<!DOCTYPE html>
+<html lang="{{ 'en' if language == 'english' else 'es' }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Select a book' if language == 'english' else 'Selecciona un libro' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .book-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ 'Select a book in English' if language == 'english' else 'Selecciona un libro en Español' }}</h2>
+        <form method="POST" action="/analysis_menu" class="book-form">
+            <label for="book">{{ 'Book:' if language == 'english' else 'Libro:' }}</label>
+            <select name="book" id="book">
+                {% for book in books %}
+                <option value="{{ book }}">{{ book }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">{{ 'Analyze' if language == 'english' else 'Analizar' }}</button>
+        </form>
+    </div>
+</body>
+</html>

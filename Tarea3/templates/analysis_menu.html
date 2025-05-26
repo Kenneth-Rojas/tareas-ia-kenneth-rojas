@@ -1,20 +1,60 @@
-<h2>Análisis para: {{ book }}</h2>
-<form method="POST" action="/analyze_basic">
-    <button type="submit">Resumen y análisis de palabras</button>
-</form>
+<!DOCTYPE html>
+<html lang="{{ 'en' if language == 'english' else 'es' }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Analysis Menu' if language == 'english' else 'Menú de Análisis' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .analysis-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+            align-items: center;
+        }
 
-<form method="POST" action="/sentiment_analysis">
-    <button type="submit">Análisis de sentimientos</button>
-</form>
+        button {
+            width: 80%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>
+            {{ 'Analysis for:' if language == 'english' else 'Análisis para:' }} {{ book }}
+        </h2>
+        <div class="analysis-buttons">
+            <form method="POST" action="/analyze_basic">
+                <button type="submit">
+                    {{ 'Summary and word analysis' if language == 'english' else 'Resumen y análisis de palabras' }}
+                </button>
+            </form>
 
-<form method="POST" action="/entity_analysis">
-    <button type="submit">Temas y protagonistas</button>
-</form>
+            <form method="POST" action="/sentiment_analysis">
+                <button type="submit">
+                    {{ 'Sentiment analysis' if language == 'english' else 'Análisis de sentimientos' }}
+                </button>
+            </form>
 
-<form method="POST" action="/flashcards">
-    <button type="submit">Generar flashcards</button>
-</form>
+            <form method="POST" action="/entity_analysis">
+                <button type="submit">
+                    {{ 'Topics and protagonists' if language == 'english' else 'Temas y protagonistas' }}
+                </button>
+            </form>
 
-<form method="POST" action="/qa">
-    <button type="submit">Preguntas y respuestas</button>
-</form>
+            <form method="POST" action="/flashcards">
+                <button type="submit">
+                    {{ 'Generate flashcards' if language == 'english' else 'Generar flashcards' }}
+                </button>
+            </form>
+
+            <form method="POST" action="/qa">
+                <button type="submit">
+                    {{ 'Q&A system' if language == 'english' else 'Preguntas y respuestas' }}
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
