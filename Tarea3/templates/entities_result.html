@@ -1,15 +1,29 @@
-<h2>Entidades Principales</h2>
-<ul>
-  {% for entity, count in result.entities %}
-    <li>{{ entity }} ({{ count }})</li>
-  {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="{{ 'en' if language|lower == 'english' else 'es' }}">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ 'Main Entities and Topics' if language|lower == 'english' else 'Entidades y Temas Principales' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <h2>{{ 'Main Entities' if language|lower == 'english' else 'Entidades Principales' }}</h2>
+        <ul>
+          {% for entity, count in result.entities %}
+            <li>{{ entity }} ({{ count }})</li>
+          {% endfor %}
+        </ul>
 
-<h2>Temas Principales</h2>
-<ul>
-  {% for topic, count in result.topics %}
-    <li>{{ topic }} ({{ count }})</li>
-  {% endfor %}
-</ul>
+        <h2>{{ 'Main Topics' if language|lower == 'english' else 'Temas Principales' }}</h2>
+        <ul>
+          {% for topic, count in result.topics %}
+            <li>{{ topic }} ({{ count }})</li>
+          {% endfor %}
+        </ul>
 
-<a href="/">Volver al inicio</a>
+        <a href="/" style="display:inline-block; margin-top:20px;">
+            {{ 'Return to start' if language|lower == 'english' else 'Volver al inicio' }}
+        </a>
+    </div>
+</body>
+</html>

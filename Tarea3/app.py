@@ -36,9 +36,10 @@ def analyze_basic():
         'result.html',
         summary=result['summary'],
         word_count=result['num_words'],
-        sentence_count=result['num_sentences']
+        sentence_count=result['num_sentences'],
+        language=language
     )
-    
+
 @app.route('/select_book')
 def select_book():
     language = session.get('language')
@@ -82,7 +83,7 @@ def sentiment_analysis():
     
     result = nlp.analyze_sentiment(text, idioma)
 
-    return render_template('sentiment_result.html', result=result)
+    return render_template('sentiment_result.html', result=result,language=idioma)
 
 @app.route('/entity_analysis', methods=['POST'])
 def entity_analysis():
@@ -98,7 +99,7 @@ def entity_analysis():
             text = f.read()
 
     result = nlp.extract_topics_entities(text, language)
-    return render_template('entities_result.html', result=result)
+    return render_template('entities_result.html', result=result, language=language)
 
 @app.route('/flashcards', methods=['POST'])
 def flashcards():
@@ -114,7 +115,7 @@ def flashcards():
             text = f.read()
 
     result = nlp.generate_flashcards(text, language)
-    return render_template('flashcards.html', flashcards=result)
+    return render_template('flashcards.html', flashcards=result, language=language)
 
 @app.route('/qa', methods=['GET', 'POST'])
 def qa():
@@ -136,7 +137,7 @@ def qa():
         if question:
             answer = nlp.answer_question(question, raw_text, language)
 
-    return render_template('qa.html', answer=answer)
+    return render_template('qa.html', answer=answer, language=language)
 
 
 

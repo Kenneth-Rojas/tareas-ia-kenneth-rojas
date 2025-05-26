@@ -1,16 +1,31 @@
-<h2>Análisis de Sentimiento</h2>
-<p><strong>Sentimiento general:</strong> {{ result.sentiment }}</p>
+<!DOCTYPE html>
+<html lang="{{ 'en' if language|lower == 'english' else 'es' }}">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ 'Sentiment Analysis' if language|lower == 'english' else 'Análisis de Sentimiento' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <h2>{{ 'Sentiment Analysis' if language|lower == 'english' else 'Análisis de Sentimiento' }}</h2>
 
-{% if result.scores %}
-  <h3>Detalles (VADER):</h3>
-  <ul>
-    {% for key, value in result.scores.items() %}
-      <li>{{ key }}: {{ value }}</li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <h3>Confianza del modelo:</h3>
-  <p>{{ result.score }}</p>
-{% endif %}
+        <p><strong>{{ 'Overall Sentiment:' if language|lower == 'english' else 'Sentimiento general:' }}</strong> {{ result.sentiment }}</p>
 
-<a href="/">Volver al inicio</a>
+        {% if result.scores %}
+            <h3>{{ 'Details (VADER):' if language|lower == 'english' else 'Detalles (VADER):' }}</h3>
+            <ul>
+                {% for key, value in result.scores.items() %}
+                    <li>{{ key }}: {{ value }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>{{ 'Model Confidence:' if language|lower == 'english' else 'Confianza del modelo:' }}</h3>
+            <p>{{ result.score }}</p>
+        {% endif %}
+
+        <a href="/" style="display:inline-block; margin-top:20px;">
+            {{ 'Return to start' if language|lower == 'english' else 'Volver al inicio' }}
+        </a>
+    </div>
+</body>
+</html>

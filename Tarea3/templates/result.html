@@ -1,10 +1,24 @@
-<h2>Resumen del libro</h2>
-<p>{{ summary }}</p>
+<!DOCTYPE html>
+<html lang="{{ 'en' if language == 'english' else 'es' }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Summary Result' if language == 'english' else 'Resultado del Análisis' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>{{ 'Book Summary' if language == 'english' else 'Resumen del libro' }}</h2>
+        <p>{{ summary }}</p>
 
-<h3>Estadísticas</h3>
-<ul>
-  <li>Total de palabras: {{ word_count }}</li>
-  <li>Total de oraciones: {{ sentence_count }}</li>
-</ul>
-<a href="/">Volver al inicio</a>
+        <h3>{{ 'Statistics' if language == 'english' else 'Estadísticas' }}</h3>
+        <ul>
+            <li>{{ 'Total words' if language == 'english' else 'Total de palabras' }}: {{ word_count }}</li>
+            <li>{{ 'Total sentences' if language == 'english' else 'Total de oraciones' }}: {{ sentence_count }}</li>
+        </ul>
 
+        <a href="/" style="display:inline-block; margin-top:20px;">
+            {{ 'Return to start' if language == 'english' else 'Volver al inicio' }}
+        </a>
+    </div>
+</body>
+</html>

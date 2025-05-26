@@ -1,14 +1,28 @@
-<h2>Sistema de Preguntas y Respuestas</h2>
+<!DOCTYPE html>
+<html lang="{{ 'en' if language|lower == 'english' else 'es' }}">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ 'Question and Answer System' if language|lower == 'english' else 'Sistema de Preguntas y Respuestas' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <h2>{{ 'Question and Answer System' if language|lower == 'english' else 'Sistema de Preguntas y Respuestas' }}</h2>
 
-<form method="post">
-  <label for="question">Escribí tu pregunta:</label><br>
-  <input type="text" id="question" name="question" required><br><br>
-  <input type="submit" value="Responder">
-</form>
+        <form method="post">
+          <label for="question">{{ 'Type your question:' if language|lower == 'english' else 'Escribí tu pregunta:' }}</label><br>
+          <input type="text" id="question" name="question" required><br><br>
+          <input type="submit" value="{{ 'Get Answer' if language|lower == 'english' else 'Responder' }}">
+        </form>
 
-{% if answer %}
-  <h3>Respuesta:</h3>
-  <p>{{ answer }}</p>
-{% endif %}
+        {% if answer %}
+          <h3>{{ 'Answer:' if language|lower == 'english' else 'Respuesta:' }}</h3>
+          <p>{{ answer }}</p>
+        {% endif %}
 
-<a href="/">Volver al inicio</a>
+        <a href="/" style="display:inline-block; margin-top:20px;">
+            {{ 'Return to start' if language|lower == 'english' else 'Volver al inicio' }}
+        </a>
+    </div>
+</body>
+</html>

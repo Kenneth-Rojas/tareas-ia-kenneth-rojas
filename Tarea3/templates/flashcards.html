@@ -1,9 +1,24 @@
-<h2>Flashcards del libro</h2>
-<ol>
-  {% for title, summary in flashcards %}
-    <li>
-      <strong>{{ title }}</strong>: {{ summary }}
-    </li>
-  {% endfor %}
-</ol>
-<a href="/">Volver al inicio</a>
+<!DOCTYPE html>
+<html lang="{{ 'en' if language|lower == 'english' else 'es' }}">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ 'Book Flashcards' if language|lower == 'english' else 'Flashcards del libro' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <h2>{{ 'Book Flashcards' if language|lower == 'english' else 'Flashcards del libro' }}</h2>
+        <ol>
+          {% for title, summary in flashcards %}
+            <li>
+              <strong>{{ title }}</strong>: {{ summary }}
+            </li>
+          {% endfor %}
+        </ol>
+
+        <a href="/" style="display:inline-block; margin-top:20px;">
+            {{ 'Return to start' if language|lower == 'english' else 'Volver al inicio' }}
+        </a>
+    </div>
+</body>
+</html>
