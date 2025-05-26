@@ -7,18 +7,25 @@ from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 import string
 
-def analyze_text_basic(text):
+def analyze_text_basic(text,lenguaje):
     # Tokenización de oraciones y palabras
-    sentences = sent_tokenize(text)
-    words = word_tokenize(text.lower())
+    pattern = r'''(?x)                 # set flag to allow verbose regexps
+              (?:[A-Z]\.)+         # abbreviations, e.g. U.S.A.
+              | \w+(?:-\w+)*       # words with optional internal hyphens
+              | \$?\d+(?:\.\d+)?%? # currency and percentages, e.g. $12.40, 82%
+              | \.\.\.             # ellipsis
+              | [][.,;"'?():-_`]   # these are separate tokens; includes ], ['''
+    if lenguaje == 'english':
+        sentences = nltk.regexp_tokenize(text, pattern)
+        words = nltk.word_tokenize(text.lower())
+    else:  # Asumimos español si no es inglés
+        sentences = nltk.regexp_tokenize(text, pattern)
+        words = nltk.word_tokenize(text, language='spanish')
 
-    # Filtrar puntuación y stopwords
-    stop_words = set(stopwords.words('english'))  # o 'spanish' según idioma
-    words_cleaned = [w for w in words if w.isalpha() and w not in stop_words]
-
+    
     # Conteo
     num_sentences = len(sentences)
-    num_words = len(words_cleaned)
+    num_words = len(words)
 
     # Resumen simple: tomar 3 primeras oraciones como ejemplo
     summary = ' '.join(sentences[:3])

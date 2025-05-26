@@ -1,0 +1,10 @@
+<h2>Selecciona un libro en {{ language }}</h2>
+<form method="POST" action="/analysis_menu">
+    <label for="book">Libro:</label>
+    <select name="book" id="book">
+        {% for book in books %}
+        <option value="{{ book }}">{{ book }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Analizar</button>
+</form>
