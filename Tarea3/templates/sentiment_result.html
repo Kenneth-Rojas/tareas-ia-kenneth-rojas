@@ -22,10 +22,11 @@
             <h3>{{ 'Model Confidence:' if language|lower == 'english' else 'Confianza del modelo:' }}</h3>
             <p>{{ result.score }}</p>
         {% endif %}
+        <div class="back-to-menu">
         <a href="/analysis_menu">
         <button type="button">{{ 'Analysis menu' if language == 'english' else 'Menu de analisis' }}</button>
         </a>
-
+        </div>
 
         <a href="/" style="display:inline-block; margin-top:20px;">
             {{ 'Return to start' if language|lower == 'english' else 'Volver al inicio' }}

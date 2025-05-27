@@ -116,3 +116,37 @@ button {
     min-width: 150px;  /* para que tengan tamaño mínimo */
     max-width: 250px;  /* limitar tamaño máximo */
 }
+.analysis-buttons form:nth-child(1) button {
+    background-color: #4CAF50; /* verde */
+    color: white;
+}
+
+.analysis-buttons form:nth-child(2) button {
+    background-color: #2196F3; /* azul */
+    color: white;
+}
+
+.analysis-buttons form:nth-child(3) button {
+    background-color: #f44336; /* rojo */
+    color: white;
+}
+
+.analysis-buttons form:nth-child(4) button {
+    background-color: #ff9800; /* naranja */
+    color: white;
+}
+
+.analysis-buttons form:nth-child(5) button {
+    background-color: #9c27b0; /* morado */
+    color: white;
+}
+
+.back-to-menu button {
+    background-color: #607d8b; /* gris azulado */
+    color: white;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}

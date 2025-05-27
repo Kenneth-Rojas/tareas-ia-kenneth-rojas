@@ -15,9 +15,11 @@
             <li>{{ 'Total words' if language == 'english' else 'Total de palabras' }}: {{ word_count }}</li>
             <li>{{ 'Total sentences' if language == 'english' else 'Total de oraciones' }}: {{ sentence_count }}</li>
         </ul>
+        <div class="back-to-menu">
         <a href="/analysis_menu">
         <button type="button">{{ 'Analysis menu' if language == 'english' else 'Menu de analisis' }}</button>
         </a>
+        </div>
 
 
 

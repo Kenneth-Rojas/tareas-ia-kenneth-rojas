@@ -20,14 +20,16 @@
             <li>{{ topic }} ({{ count }})</li>
           {% endfor %}
         </ul>
+        <a href="/" style="display:inline-block; margin-top:20px;">
+        {{ 'Return to start' if language|lower == 'english' else 'Volver al inicio' }}
+        </a>
+        <div class="back-to-menu">
         <a href="/analysis_menu">
         <button type="button">{{ 'Analysis menu' if language == 'english' else 'Menu de analisis' }}</button>
         </a>
+        </div>
+</div>
 
-
-        <a href="/" style="display:inline-block; margin-top:20px;">
-            {{ 'Return to start' if language|lower == 'english' else 'Volver al inicio' }}
-        </a>
     </div>
 </body>
 </html>
