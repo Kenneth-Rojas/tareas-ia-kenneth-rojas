@@ -40,7 +40,7 @@ def analyze_basic():
         language=language
     )
 
-@app.route('/select_book')
+@app.route('/select_book',methods=['POST','GET'])
 def select_book():
     language = session.get('language')
     if not language:

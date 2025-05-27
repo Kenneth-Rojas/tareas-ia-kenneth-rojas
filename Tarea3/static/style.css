@@ -1,18 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #1e3c72, #2a5298); /* Azul oscuro degradado */
+    color: #f1f1f1; /* texto principal claro */
 }
 
 .container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: rgba(204, 203, 203, 0.986);
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(8px);
+    color: #f5f5f5;
+    border: 1px solid rgba(255,255,255,0.1);
 }
+
+h1, h2, h3 {
+    color: #ffffff; /* títulos blancos puros */
+    font-weight: 600;
+}
+
+p, li {
+    color: #dddddd;
+}
+
 
 h1, h2, h3 {
     color: #333;
@@ -25,8 +34,8 @@ p, li {
 }
 
 button, input[type="submit"] {
-    background-color: #007BFF;
-    color: white;
+    color: #ffffff;
+    background-color: #0066cc;
     border: none;
     padding: 10px 16px;
     border-radius: 5px;
@@ -36,7 +45,7 @@ button, input[type="submit"] {
 }
 
 button:hover, input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #3385ff;
 }
 
 button:focus, a:focus {
@@ -45,11 +54,12 @@ button:focus, a:focus {
 }
 
 a {
-    color: #007BFF;
+    color: #80bfff;
     text-decoration: none;
 }
 
 a:hover {
+    color: #ffffff;
     text-decoration: underline;
 }
 
@@ -141,6 +151,11 @@ button {
     color: white;
 }
 
+.analysis-buttons form:nth-child(6) button {
+    background-color: #00bcd4; /* cyan */
+    color: white;
+}
+
 .back-to-menu button {
     background-color: #607d8b; /* gris azulado */
     color: white;
@@ -149,4 +164,28 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.analysis-buttons form:nth-child(1) button:hover {
+    background-color: #45a049;
+}
+
+.analysis-buttons form:nth-child(2) button:hover {
+    background-color: #1976D2;
+}
+
+.analysis-buttons form:nth-child(3) button:hover {
+    background-color: #e53935;
+}
+
+.analysis-buttons form:nth-child(4) button:hover {
+    background-color: #fb8c00;
+}
+
+.analysis-buttons form:nth-child(5) button:hover {
+    background-color: #8e24aa;
+}
+
+.back-to-menu button:hover {
+    background-color: #546e7a;
 }
