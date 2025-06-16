@@ -47,7 +47,7 @@ shap.plots.force(
     class1_base_values[0],
     class1_shap_values[0],
     X_test.iloc[0],
-    matplotlib=True  # IMPORTANTE para VSCode
+    matplotlib=True
 )
 
 # === LIME ===
